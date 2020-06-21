@@ -1,6 +1,7 @@
 import cv2 as cv
 import numpy as np
 
+# https://machinelearningmastery.com/calculate-principal-component-analysis-scratch-python/
 
 # train data
 def pca_compress(data_mat, k=9999999):
