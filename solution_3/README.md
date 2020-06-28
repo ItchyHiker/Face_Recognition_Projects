@@ -12,3 +12,8 @@ REFERENCE_FACIAL_POINTS = [
 ]
 DEFAULT_CROP_SIZE = (96, 112)
 ```
+4. 阅读lfw数据的[README](http://vis-www.cs.umass.edu/lfw/README.txt)信息
+下载 [pairs.txt](http://vis-www.cs.umass.edu/lfw/pairs.txt)文件，里面有3000对match人脸图像和3000对unmatch人脸图像
+
+5. 裁剪CASIA-WebFace和LFW数据库
+
