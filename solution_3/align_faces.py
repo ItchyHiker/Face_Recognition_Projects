@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Apr 24 15:43:29 2017
-@author: zhaoy
-"""
 import cv2
 import numpy as np
 from skimage import transform as trans
@@ -29,6 +24,7 @@ def get_reference_facial_points(output_size=None,
                                 inner_padding_factor=0.0,
                                 outer_padding=(0, 0),
                                 default_square=False):
+    
     tmp_5pts = np.array(REFERENCE_FACIAL_POINTS)
     tmp_crop_size = np.array(DEFAULT_CROP_SIZE)
 
@@ -38,9 +34,11 @@ def get_reference_facial_points(output_size=None,
         tmp_5pts += size_diff / 2
         tmp_crop_size += size_diff
 
+    '''
     print('---> default:')
     print('              crop_size = ', tmp_crop_size)
     print('              reference_5pts = ', tmp_5pts)
+    '''
 
     if (output_size and
             output_size[0] == tmp_crop_size[0] and
