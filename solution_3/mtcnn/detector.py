@@ -70,10 +70,14 @@ class MtcnnDetector:
             for s in scales:
                 boxes = run_first_stage(image, self.pnet, scale=s, threshold=thresholds[0])
                 bounding_boxes.append(boxes)
+            
+            # print("bounding_boxes:", bounding_boxes)
 
             # collect boxes (and offsets, and scores) from different scales
             bounding_boxes = [i for i in bounding_boxes if i is not None]
-            print(len(bounding_boxes))
+            if len(bounding_boxes) == 0:
+                return [], []
+            
             bounding_boxes = np.vstack(bounding_boxes)
 
             keep = nms(bounding_boxes[:, 0:5], nms_thresholds[0])
