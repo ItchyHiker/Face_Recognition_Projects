@@ -1,0 +1,558 @@
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (bn0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=64)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=64, out_features=4, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=4, out_features=64, bias=True)
+          (3): Sigmoid()
+        )
+      )
+    )
+    (1): BasicBlock(
+      (bn0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=64)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=64, out_features=4, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=4, out_features=64, bias=True)
+          (3): Sigmoid()
+        )
+      )
+    )
+    (2): BasicBlock(
+      (bn0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=64)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=64, out_features=4, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=4, out_features=64, bias=True)
+          (3): Sigmoid()
+        )
+      )
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (bn0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=128)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=128, out_features=8, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=8, out_features=128, bias=True)
+          (3): Sigmoid()
+        )
+      )
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (bn0): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=128)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=128, out_features=8, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=8, out_features=128, bias=True)
+          (3): Sigmoid()
+        )
+      )
+    )
+    (2): BasicBlock(
+      (bn0): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=128)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=128, out_features=8, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=8, out_features=128, bias=True)
+          (3): Sigmoid()
+        )
+      )
+    )
+    (3): BasicBlock(
+      (bn0): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=128)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=128, out_features=8, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=8, out_features=128, bias=True)
+          (3): Sigmoid()
+        )
+      )
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (bn0): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=256)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=256, out_features=16, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=16, out_features=256, bias=True)
+          (3): Sigmoid()
+        )
+      )
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (bn0): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=256)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=256, out_features=16, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=16, out_features=256, bias=True)
+          (3): Sigmoid()
+        )
+      )
+    )
+    (2): BasicBlock(
+      (bn0): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=256)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=256, out_features=16, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=16, out_features=256, bias=True)
+          (3): Sigmoid()
+        )
+      )
+    )
+    (3): BasicBlock(
+      (bn0): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=256)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=256, out_features=16, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=16, out_features=256, bias=True)
+          (3): Sigmoid()
+        )
+      )
+    )
+    (4): BasicBlock(
+      (bn0): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=256)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=256, out_features=16, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=16, out_features=256, bias=True)
+          (3): Sigmoid()
+        )
+      )
+    )
+    (5): BasicBlock(
+      (bn0): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=256)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=256, out_features=16, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=16, out_features=256, bias=True)
+          (3): Sigmoid()
+        )
+      )
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (bn0): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=512)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=512, out_features=32, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=32, out_features=512, bias=True)
+          (3): Sigmoid()
+        )
+      )
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (bn0): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=512)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=512, out_features=32, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=32, out_features=512, bias=True)
+          (3): Sigmoid()
+        )
+      )
+    )
+    (2): BasicBlock(
+      (bn0): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): PReLU(num_parameters=512)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (se): SEBlock(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc): Sequential(
+          (0): Linear(in_features=512, out_features=32, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=32, out_features=512, bias=True)
+          (3): Sigmoid()
+        )
+      )
+    )
+  )
+  (output_layer): Sequential(
+    (0): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (1): Dropout(p=0.4, inplace=False)
+    (2): Flatten()
+    (3): Linear(in_features=25088, out_features=512, bias=True)
+    (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+)
+torch.Size([2, 512])
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 64, 112, 112]           1,728
+       BatchNorm2d-2         [-1, 64, 112, 112]             128
+              ReLU-3         [-1, 64, 112, 112]               0
+         MaxPool2d-4           [-1, 64, 56, 56]               0
+       BatchNorm2d-5           [-1, 64, 56, 56]             128
+            Conv2d-6           [-1, 64, 56, 56]          36,864
+       BatchNorm2d-7           [-1, 64, 56, 56]             128
+             PReLU-8           [-1, 64, 56, 56]              64
+            Conv2d-9           [-1, 64, 56, 56]          36,864
+      BatchNorm2d-10           [-1, 64, 56, 56]             128
+AdaptiveAvgPool2d-11             [-1, 64, 1, 1]               0
+           Linear-12                    [-1, 4]             260
+             ReLU-13                    [-1, 4]               0
+           Linear-14                   [-1, 64]             320
+          Sigmoid-15                   [-1, 64]               0
+          SEBlock-16           [-1, 64, 56, 56]               0
+            PReLU-17           [-1, 64, 56, 56]              64
+       BasicBlock-18           [-1, 64, 56, 56]               0
+      BatchNorm2d-19           [-1, 64, 56, 56]             128
+           Conv2d-20           [-1, 64, 56, 56]          36,864
+      BatchNorm2d-21           [-1, 64, 56, 56]             128
+            PReLU-22           [-1, 64, 56, 56]              64
+           Conv2d-23           [-1, 64, 56, 56]          36,864
+      BatchNorm2d-24           [-1, 64, 56, 56]             128
+AdaptiveAvgPool2d-25             [-1, 64, 1, 1]               0
+           Linear-26                    [-1, 4]             260
+             ReLU-27                    [-1, 4]               0
+           Linear-28                   [-1, 64]             320
+          Sigmoid-29                   [-1, 64]               0
+          SEBlock-30           [-1, 64, 56, 56]               0
+            PReLU-31           [-1, 64, 56, 56]              64
+       BasicBlock-32           [-1, 64, 56, 56]               0
+      BatchNorm2d-33           [-1, 64, 56, 56]             128
+           Conv2d-34           [-1, 64, 56, 56]          36,864
+      BatchNorm2d-35           [-1, 64, 56, 56]             128
+            PReLU-36           [-1, 64, 56, 56]              64
+           Conv2d-37           [-1, 64, 56, 56]          36,864
+      BatchNorm2d-38           [-1, 64, 56, 56]             128
+AdaptiveAvgPool2d-39             [-1, 64, 1, 1]               0
+           Linear-40                    [-1, 4]             260
+             ReLU-41                    [-1, 4]               0
+           Linear-42                   [-1, 64]             320
+          Sigmoid-43                   [-1, 64]               0
+          SEBlock-44           [-1, 64, 56, 56]               0
+            PReLU-45           [-1, 64, 56, 56]              64
+       BasicBlock-46           [-1, 64, 56, 56]               0
+      BatchNorm2d-47           [-1, 64, 56, 56]             128
+           Conv2d-48          [-1, 128, 56, 56]          73,728
+      BatchNorm2d-49          [-1, 128, 56, 56]             256
+            PReLU-50          [-1, 128, 56, 56]             128
+           Conv2d-51          [-1, 128, 28, 28]         147,456
+      BatchNorm2d-52          [-1, 128, 28, 28]             256
+AdaptiveAvgPool2d-53            [-1, 128, 1, 1]               0
+           Linear-54                    [-1, 8]           1,032
+             ReLU-55                    [-1, 8]               0
+           Linear-56                  [-1, 128]           1,152
+          Sigmoid-57                  [-1, 128]               0
+          SEBlock-58          [-1, 128, 28, 28]               0
+           Conv2d-59          [-1, 128, 28, 28]           8,192
+      BatchNorm2d-60          [-1, 128, 28, 28]             256
+            PReLU-61          [-1, 128, 28, 28]             128
+       BasicBlock-62          [-1, 128, 28, 28]               0
+      BatchNorm2d-63          [-1, 128, 28, 28]             256
+           Conv2d-64          [-1, 128, 28, 28]         147,456
+      BatchNorm2d-65          [-1, 128, 28, 28]             256
+            PReLU-66          [-1, 128, 28, 28]             128
+           Conv2d-67          [-1, 128, 28, 28]         147,456
+      BatchNorm2d-68          [-1, 128, 28, 28]             256
+AdaptiveAvgPool2d-69            [-1, 128, 1, 1]               0
+           Linear-70                    [-1, 8]           1,032
+             ReLU-71                    [-1, 8]               0
+           Linear-72                  [-1, 128]           1,152
+          Sigmoid-73                  [-1, 128]               0
+          SEBlock-74          [-1, 128, 28, 28]               0
+            PReLU-75          [-1, 128, 28, 28]             128
+       BasicBlock-76          [-1, 128, 28, 28]               0
+      BatchNorm2d-77          [-1, 128, 28, 28]             256
+           Conv2d-78          [-1, 128, 28, 28]         147,456
+      BatchNorm2d-79          [-1, 128, 28, 28]             256
+            PReLU-80          [-1, 128, 28, 28]             128
+           Conv2d-81          [-1, 128, 28, 28]         147,456
+      BatchNorm2d-82          [-1, 128, 28, 28]             256
+AdaptiveAvgPool2d-83            [-1, 128, 1, 1]               0
+           Linear-84                    [-1, 8]           1,032
+             ReLU-85                    [-1, 8]               0
+           Linear-86                  [-1, 128]           1,152
+          Sigmoid-87                  [-1, 128]               0
+          SEBlock-88          [-1, 128, 28, 28]               0
+            PReLU-89          [-1, 128, 28, 28]             128
+       BasicBlock-90          [-1, 128, 28, 28]               0
+      BatchNorm2d-91          [-1, 128, 28, 28]             256
+           Conv2d-92          [-1, 128, 28, 28]         147,456
+      BatchNorm2d-93          [-1, 128, 28, 28]             256
+            PReLU-94          [-1, 128, 28, 28]             128
+           Conv2d-95          [-1, 128, 28, 28]         147,456
+      BatchNorm2d-96          [-1, 128, 28, 28]             256
+AdaptiveAvgPool2d-97            [-1, 128, 1, 1]               0
+           Linear-98                    [-1, 8]           1,032
+             ReLU-99                    [-1, 8]               0
+          Linear-100                  [-1, 128]           1,152
+         Sigmoid-101                  [-1, 128]               0
+         SEBlock-102          [-1, 128, 28, 28]               0
+           PReLU-103          [-1, 128, 28, 28]             128
+      BasicBlock-104          [-1, 128, 28, 28]               0
+     BatchNorm2d-105          [-1, 128, 28, 28]             256
+          Conv2d-106          [-1, 256, 28, 28]         294,912
+     BatchNorm2d-107          [-1, 256, 28, 28]             512
+           PReLU-108          [-1, 256, 28, 28]             256
+          Conv2d-109          [-1, 256, 14, 14]         589,824
+     BatchNorm2d-110          [-1, 256, 14, 14]             512
+AdaptiveAvgPool2d-111            [-1, 256, 1, 1]               0
+          Linear-112                   [-1, 16]           4,112
+            ReLU-113                   [-1, 16]               0
+          Linear-114                  [-1, 256]           4,352
+         Sigmoid-115                  [-1, 256]               0
+         SEBlock-116          [-1, 256, 14, 14]               0
+          Conv2d-117          [-1, 256, 14, 14]          32,768
+     BatchNorm2d-118          [-1, 256, 14, 14]             512
+           PReLU-119          [-1, 256, 14, 14]             256
+      BasicBlock-120          [-1, 256, 14, 14]               0
+     BatchNorm2d-121          [-1, 256, 14, 14]             512
+          Conv2d-122          [-1, 256, 14, 14]         589,824
+     BatchNorm2d-123          [-1, 256, 14, 14]             512
+           PReLU-124          [-1, 256, 14, 14]             256
+          Conv2d-125          [-1, 256, 14, 14]         589,824
+     BatchNorm2d-126          [-1, 256, 14, 14]             512
+AdaptiveAvgPool2d-127            [-1, 256, 1, 1]               0
+          Linear-128                   [-1, 16]           4,112
+            ReLU-129                   [-1, 16]               0
+          Linear-130                  [-1, 256]           4,352
+         Sigmoid-131                  [-1, 256]               0
+         SEBlock-132          [-1, 256, 14, 14]               0
+           PReLU-133          [-1, 256, 14, 14]             256
+      BasicBlock-134          [-1, 256, 14, 14]               0
+     BatchNorm2d-135          [-1, 256, 14, 14]             512
+          Conv2d-136          [-1, 256, 14, 14]         589,824
+     BatchNorm2d-137          [-1, 256, 14, 14]             512
+           PReLU-138          [-1, 256, 14, 14]             256
+          Conv2d-139          [-1, 256, 14, 14]         589,824
+     BatchNorm2d-140          [-1, 256, 14, 14]             512
+AdaptiveAvgPool2d-141            [-1, 256, 1, 1]               0
+          Linear-142                   [-1, 16]           4,112
+            ReLU-143                   [-1, 16]               0
+          Linear-144                  [-1, 256]           4,352
+         Sigmoid-145                  [-1, 256]               0
+         SEBlock-146          [-1, 256, 14, 14]               0
+           PReLU-147          [-1, 256, 14, 14]             256
+      BasicBlock-148          [-1, 256, 14, 14]               0
+     BatchNorm2d-149          [-1, 256, 14, 14]             512
+          Conv2d-150          [-1, 256, 14, 14]         589,824
+     BatchNorm2d-151          [-1, 256, 14, 14]             512
+           PReLU-152          [-1, 256, 14, 14]             256
+          Conv2d-153          [-1, 256, 14, 14]         589,824
+     BatchNorm2d-154          [-1, 256, 14, 14]             512
+AdaptiveAvgPool2d-155            [-1, 256, 1, 1]               0
+          Linear-156                   [-1, 16]           4,112
+            ReLU-157                   [-1, 16]               0
+          Linear-158                  [-1, 256]           4,352
+         Sigmoid-159                  [-1, 256]               0
+         SEBlock-160          [-1, 256, 14, 14]               0
+           PReLU-161          [-1, 256, 14, 14]             256
+      BasicBlock-162          [-1, 256, 14, 14]               0
+     BatchNorm2d-163          [-1, 256, 14, 14]             512
+          Conv2d-164          [-1, 256, 14, 14]         589,824
+     BatchNorm2d-165          [-1, 256, 14, 14]             512
+           PReLU-166          [-1, 256, 14, 14]             256
+          Conv2d-167          [-1, 256, 14, 14]         589,824
+     BatchNorm2d-168          [-1, 256, 14, 14]             512
+AdaptiveAvgPool2d-169            [-1, 256, 1, 1]               0
+          Linear-170                   [-1, 16]           4,112
+            ReLU-171                   [-1, 16]               0
+          Linear-172                  [-1, 256]           4,352
+         Sigmoid-173                  [-1, 256]               0
+         SEBlock-174          [-1, 256, 14, 14]               0
+           PReLU-175          [-1, 256, 14, 14]             256
+      BasicBlock-176          [-1, 256, 14, 14]               0
+     BatchNorm2d-177          [-1, 256, 14, 14]             512
+          Conv2d-178          [-1, 256, 14, 14]         589,824
+     BatchNorm2d-179          [-1, 256, 14, 14]             512
+           PReLU-180          [-1, 256, 14, 14]             256
+          Conv2d-181          [-1, 256, 14, 14]         589,824
+     BatchNorm2d-182          [-1, 256, 14, 14]             512
+AdaptiveAvgPool2d-183            [-1, 256, 1, 1]               0
+          Linear-184                   [-1, 16]           4,112
+            ReLU-185                   [-1, 16]               0
+          Linear-186                  [-1, 256]           4,352
+         Sigmoid-187                  [-1, 256]               0
+         SEBlock-188          [-1, 256, 14, 14]               0
+           PReLU-189          [-1, 256, 14, 14]             256
+      BasicBlock-190          [-1, 256, 14, 14]               0
+     BatchNorm2d-191          [-1, 256, 14, 14]             512
+          Conv2d-192          [-1, 512, 14, 14]       1,179,648
+     BatchNorm2d-193          [-1, 512, 14, 14]           1,024
+           PReLU-194          [-1, 512, 14, 14]             512
+          Conv2d-195            [-1, 512, 7, 7]       2,359,296
+     BatchNorm2d-196            [-1, 512, 7, 7]           1,024
+AdaptiveAvgPool2d-197            [-1, 512, 1, 1]               0
+          Linear-198                   [-1, 32]          16,416
+            ReLU-199                   [-1, 32]               0
+          Linear-200                  [-1, 512]          16,896
+         Sigmoid-201                  [-1, 512]               0
+         SEBlock-202            [-1, 512, 7, 7]               0
+          Conv2d-203            [-1, 512, 7, 7]         131,072
+     BatchNorm2d-204            [-1, 512, 7, 7]           1,024
+           PReLU-205            [-1, 512, 7, 7]             512
+      BasicBlock-206            [-1, 512, 7, 7]               0
+     BatchNorm2d-207            [-1, 512, 7, 7]           1,024
+          Conv2d-208            [-1, 512, 7, 7]       2,359,296
+     BatchNorm2d-209            [-1, 512, 7, 7]           1,024
+           PReLU-210            [-1, 512, 7, 7]             512
+          Conv2d-211            [-1, 512, 7, 7]       2,359,296
+     BatchNorm2d-212            [-1, 512, 7, 7]           1,024
+AdaptiveAvgPool2d-213            [-1, 512, 1, 1]               0
+          Linear-214                   [-1, 32]          16,416
+            ReLU-215                   [-1, 32]               0
+          Linear-216                  [-1, 512]          16,896
+         Sigmoid-217                  [-1, 512]               0
+         SEBlock-218            [-1, 512, 7, 7]               0
+           PReLU-219            [-1, 512, 7, 7]             512
+      BasicBlock-220            [-1, 512, 7, 7]               0
+     BatchNorm2d-221            [-1, 512, 7, 7]           1,024
+          Conv2d-222            [-1, 512, 7, 7]       2,359,296
+     BatchNorm2d-223            [-1, 512, 7, 7]           1,024
+           PReLU-224            [-1, 512, 7, 7]             512
+          Conv2d-225            [-1, 512, 7, 7]       2,359,296
+     BatchNorm2d-226            [-1, 512, 7, 7]           1,024
+AdaptiveAvgPool2d-227            [-1, 512, 1, 1]               0
+          Linear-228                   [-1, 32]          16,416
+            ReLU-229                   [-1, 32]               0
+          Linear-230                  [-1, 512]          16,896
+         Sigmoid-231                  [-1, 512]               0
+         SEBlock-232            [-1, 512, 7, 7]               0
+           PReLU-233            [-1, 512, 7, 7]             512
+      BasicBlock-234            [-1, 512, 7, 7]               0
+     BatchNorm2d-235            [-1, 512, 7, 7]           1,024
+         Dropout-236            [-1, 512, 7, 7]               0
+         Flatten-237                [-1, 25088]               0
+          Linear-238                  [-1, 512]      12,845,568
+     BatchNorm1d-239                  [-1, 512]           1,024
+================================================================
+Total params: 34,300,012
+Trainable params: 34,300,012
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.14
+Forward/backward pass size (MB): 131.40
+Params size (MB): 130.84
+Estimated Total Size (MB): 262.39
+----------------------------------------------------------------
