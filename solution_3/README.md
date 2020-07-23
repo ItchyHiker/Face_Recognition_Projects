@@ -16,4 +16,5 @@
 下载 [pairs.txt](http://vis-www.cs.umass.edu/lfw/pairs.txt)文件，里面有3000对match人脸图像和3000对unmatch人脸图像
 
 5. 裁剪CASIA-WebFace和LFW数据库
-
+    + LFW: 13233张原始图片裁剪出13232张图片，少裁剪一张，具体是哪张还不知道。
+    + CASIA_WebFace: 494414张原始图片裁剪出494414张图片
