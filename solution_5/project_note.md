@@ -3,7 +3,8 @@
 2. LFW: Marilyn_Monroe/Marilyn_Monroe_0001.jpg 没有切出来
 ## Todo
 - [x] Test
-- [ ] Save Model
+- [x] Save Model
+- [ ] Save best model
 - [ ] Transforms
 - [ ] Logs
 - [ ] Loss functions
@@ -12,5 +13,6 @@
 	- [ ] SphereFace
 - [ ] Flip while evaluating
 - [ ] L2 Distance bug
-- [ ] MobileFaceNet
+- [x] MobileFaceNet
+- [x] Load pretrained weights
 
