@@ -4,7 +4,7 @@
 3. LFW accuracy 到 82% 左右就不提升了
 	+ 查看 eval 是否有问题
 	+ 貌似是LFW图没有切好或者是数据读取不对
-	问题就是图没有切好
+	问题就是图没有切好, 使用这个没问题：https://github.com/wujiyang/Face_Pytorch
 
 
 
@@ -24,6 +24,8 @@
 - [x] Load pretrained weights
 - [ ] Plot metric space
 - [x] Compare LFW cropped result with other method
+- [ ] Debug LFW dataset crop and align using MTCNN
+
 
 
 
