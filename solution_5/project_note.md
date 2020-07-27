@@ -4,19 +4,19 @@
 3. LFW accuracy 到 82% 左右就不提升了
 	+ 查看 eval 是否有问题
 	+ 貌似是LFW图没有切好或者是数据读取不对
-	问题就是图没有切好, 使用这个没问题：https://github.com/wujiyang/Face_Pytorch
+	问题就是图没有切好, 使用这个里面的LFW没问题：https://github.com/wujiyang/Face_Pytorch
 
 
 
 ## Todo
 - [x] Test
 - [x] Save Model
-- [ ] Save best model
+- [x] Save best model
 - [ ] Transforms
 - [ ] Logs
 - [ ] Loss functions
 	- [x] Softmax
-	- [ ] NormFace
+	- [x] NormFace
 	- [ ] SphereFace
 - [ ] Flip while evaluating
 - [ ] L2 Distance bug
@@ -32,3 +32,6 @@
 ## Reference
 1. Losses: https://github.com/DequanZhu/FaceNet-and-FaceLoss-collections-tensorflow2.0
 2. Plot metric space: https://github.com/cvqluu/Angular-Penalty-Softmax-Losses-Pytorch
+3. NormFace: https://zhuanlan.zhihu.com/p/64427565
+4. PyTorch Margins: https://github.com/wujiyang/Face_Pytorch
+	+ 
