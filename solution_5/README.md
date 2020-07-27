@@ -5,11 +5,11 @@
 
 ## Result Report
 |SEResNet18|LFW|
-|:-:|-|
-|Softmax||
-|NormFace|
-|SpereFace|
-|CosFace|
-|ArcFace|
-|OHEM + NormFace|
+|:------------------:|:---:|
+|       Softmax      |     |
+|       NormFace     |
+|      SpereFace     |
+|       CosFace      |
+|       ArcFace      |
+|   OHEM + NormFace  |
 |FocalLoss + NormFace|
