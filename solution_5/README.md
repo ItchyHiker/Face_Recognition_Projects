@@ -7,10 +7,10 @@
 
 |      SEResNet18    |   LFW  |
 |:------------------:|:------:|
-|       Softmax      |        |
+|       Softmax      | 96.55% |
 |       NormFace     | 97.63% |
-|      SpereFace     |
+|      SpereFace     | 
 |       CosFace      |
-|       ArcFace      |
+|       ArcFace      | 
 |   OHEM + NormFace  |
 |FocalLoss + NormFace|
