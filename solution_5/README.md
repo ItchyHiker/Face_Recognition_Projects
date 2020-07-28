@@ -9,8 +9,8 @@
 |:------------------:|:------:|
 |       Softmax      | 96.55% |
 |       NormFace     | 97.63% |
-|      SpereFace     | 
-|       CosFace      |
+|      SpereFace     | 98.50% |
+|       CosFace      | 
 |       ArcFace      | 
 |   OHEM + NormFace  |
 |FocalLoss + NormFace|
