@@ -4,10 +4,11 @@
 
 
 ## Result Report
-|SEResNet18|LFW|
-|:------------------:|:---:|
-|       Softmax      |     |
-|       NormFace     |
+
+|      SEResNet18    |   LFW  |
+|:------------------:|:------:|
+|       Softmax      |        |
+|       NormFace     | 97.63% |
 |      SpereFace     |
 |       CosFace      |
 |       ArcFace      |
