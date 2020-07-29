@@ -40,16 +40,17 @@ ckpt_tag = 'mobilefacenet'
 model = MobileFaceNet(config.feature_dim)
 summary(model.cuda(), (3, 112, 112))
 model = model.to(device)
-# model.load_state_dict(torch.load('./pretrained_weights/se_resnet18_0015.pth', 
-#                                                            map_location='cpu'))
+model.load_state_dict(torch.load('./pretrained_weights/{}_0011.pth'.format(ckpt_tag), 
+                                                            map_location='cpu'))
 # Set margin
 if config.margin_type == 'Softmax':
     margin = nn.Linear(config.feature_dim, train_data.num_class)
 else:
     raise NameError("Margin Not Supported!")
 margin = margin.to(device)
-# margin.load_state_dict(torch.load('./pretrained_weights/se_resnet18_512_margin_0015.pth', 
-#                                                            map_location='cpu'))
+margin.load_state_dict(
+        torch.load('./pretrained_weights/{}_512_margin_0011.pth'.format(ckpt_tag), 
+                                                            map_location='cpu'))
 
 
 # Set optimizer
