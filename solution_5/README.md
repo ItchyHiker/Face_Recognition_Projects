@@ -11,6 +11,6 @@
 |       NormFace     | 97.63% |
 |      SpereFace     | 98.50% |
 |       CosFace      | 98.88% |
-|       ArcFace      | 
+|       ArcFace      | 98.72% |
 |   OHEM + NormFace  |
 |FocalLoss + NormFace|
