@@ -17,7 +17,8 @@
 - [ ] Loss functions
 	- [x] Softmax
 	- [x] NormFace
-	- [ ] SphereFace
+	- [x] SphereFace: https://github.com/wujiyang/Face_Pytorch/blob/master/margin/SphereMarginProduct.py
+	- [x] ArcFace
 - [ ] Flip while evaluating
 - [ ] L2 Distance bug
 - [x] MobileFaceNet
