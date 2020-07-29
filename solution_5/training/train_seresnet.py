@@ -11,9 +11,10 @@ from torch.utils.data import DataLoader
 from torchsummary import summary
 
 from tools.datasets import CASIAWebFace, LFW
-from nets.se_resnet import ResNet18
+from nets.se_resnet import ResNet18, ResNet34
 from training.trainer import Trainer
 import config
+from layer import NormFace, SphereFace, CosFace, ArcFace
 
 # Set training device
 use_cuda = config.USE_CUDA and torch.cuda.is_available()
@@ -30,28 +31,39 @@ transforms = tfs.Compose([
 kwargs = {'num_workers': 8, 'pin_memory': True} if use_cuda else {}
 train_data = CASIAWebFace('./training_data/CASIA', 'annotations/CASIA_anno.txt',
         transforms)
-lfw_data = LFW('./training_data/LFW', 'annotations/lfw_pairs.txt', transforms)
+# lfw_data = LFW('./training_data/LFW', 'annotations/lfw_pairs.txt', transforms)
+lfw_data = LFW('./LFW/lfw_align_112', './LFW/pairs.txt', transforms)
 val_data = None
 dataloaders = {'train': DataLoader(train_data, batch_size=config.BATCH_SIZE,
                                     shuffle=True, **kwargs),
                 'LFW': DataLoader(lfw_data, batch_size=config.BATCH_SIZE,
                                     shuffle=False, **kwargs),}
 
-ckpt_tag = 'se_resnet18'                
+ckpt_tag = 'se_resnet18'
+
 # Set model
 model = ResNet18()
 summary(model.cuda(), (3, 112, 112))
 model = model.to(device)
-model.load_state_dict(torch.load('./pretrained_weights/se_resnet18_0015.pth', 
-                                                            map_location='cpu'))
+# model.load_state_dict(torch.load('./pretrained_weights/se_resnet18_0015.pth', 
+#                                                            map_location='cpu'))
+print(config.margin_type)
 # Set margin
 if config.margin_type == 'Softmax':
     margin = nn.Linear(config.feature_dim, train_data.num_class)
+elif config.margin_type == 'NormFace':
+    margin = NormFace(config.feature_dim, train_data.num_class)
+elif config.margin_type == 'SphereFace':
+    margin = SphereFace(config.feature_dim, train_data.num_class)
+elif config.margin_type == 'CosFace':
+    margin = CosFace(config.feature_dim, train_data.num_class)
+elif config.margin_type == 'ArcFace': 
+    margin = ArcFace(config.feature_dim, train_data.num_class)
 else:
     raise NameError("Margin Not Supported!")
 margin = margin.to(device)
-margin.load_state_dict(torch.load('./pretrained_weights/se_resnet18_512_margin_0015.pth', 
-                                                            map_location='cpu'))
+# margin.load_state_dict(torch.load('./pretrained_weights/se_resnet18_512_margin_0015.pth', 
+#                                                            map_location='cpu'))
 
 
 # Set optimizer

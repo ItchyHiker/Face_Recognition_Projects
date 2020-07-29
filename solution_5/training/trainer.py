@@ -6,6 +6,7 @@ import torch.nn as nn
 import numpy as np
 
 from loss import *
+from layer import NormFace, SphereFace, CosFace, ArcFace
 from tools.average_meter import AverageMeter
 
 
@@ -22,7 +23,7 @@ class Trainer(object):
         self.device = device
         self.margin = margin
         self.ckpt_tag = ckpt_tag
-
+         
         # save best model
         self.best_val_acc = -100
         
@@ -30,9 +31,11 @@ class Trainer(object):
     
     def train(self):
         for epoch in range(self.epochs):
-            # self.train_epoch(epoch, 'train')
+            self.train_epoch(epoch, 'train')
             self.eval_epoch(epoch, 'LFW')
-        
+        print("Best acc on LFW: {}, best threshold: {}".format(self.best_val_acc, 
+            self.best_threshold))
+
     def train_epoch(self, epoch, phase):
         loss_ = AverageMeter()
         accuracy_ = AverageMeter()
@@ -45,8 +48,13 @@ class Trainer(object):
             self.optimizer.zero_grad()
             with torch.set_grad_enabled(True):
                 logits = self.model(image)
-                if isinstance(self.margin, torch.nn.Linear):
+                if isinstance(self.margin, torch.nn.Linear) or \
+                    isinstance(self.margin, NormFace):
                     output = self.margin(logits)
+                elif isinstance(self.margin, SphereFace) or \
+                     isinstance(self.margin, CosFace) or \
+                     isinstance(self.margin, ArcFace):
+                    output = self.margin(logits, label)
                 else:
                     raise NameError("Margin Type Not Supported!")
                 
@@ -69,9 +77,11 @@ class Trainer(object):
         print("Train Epoch Loss: {:.6f} Accuracy: {:.6f}".format( loss_.avg, 
                                                                 accuracy_.avg))
         torch.save(self.model.state_dict(), 
-                './checkpoints/{}_{:04d}.pth'.format(self.ckpt_tag, epoch))
+                './checkpoints/{}_{}_{:04d}.pth'.format(self.ckpt_tag, 
+                                                        str(self.margin), epoch))
         torch.save(self.margin.state_dict(), 
-                './checkpoints/{}_512_margin_{:04d}.pth'.format(self.ckpt_tag, epoch))
+                './checkpoints/{}_512_{}_{:04d}.pth'.format(self.ckpt_tag, 
+                                                        str(self.margin), epoch))
 
     def eval_epoch(self, epoch, phase):
         feature_ls = feature_rs = flags = folds = None
@@ -100,7 +110,15 @@ class Trainer(object):
     
         print("Eval Epoch Average Acc: {:.4f}, Average Threshold: {:.4f}".format(
             np.mean(accs), np.mean(thresholds)))
-        
+        if np.mean(accs) > self.best_val_acc:
+            self.best_val_acc = np.mean(accs)
+            torch.save(self.model.state_dict(), 
+                    './checkpoints/{}_{}_best.pth'.format(self.ckpt_tag, 
+                                                                str(self.margin)))
+            torch.save(self.margin.state_dict(), 
+                    './checkpoints/{}_512_{}_best.pth'.format(self.ckpt_tag, str(self.margin)))
+            self.best_threshold = np.mean(thresholds)
+
     def getDeepFeature(self, img_l, img_r):
         self.model.eval()
         with torch.no_grad():
@@ -121,11 +139,9 @@ class Trainer(object):
                                          0), 0)
             feature_ls = feature_ls - mu
             feature_rs = feature_rs - mu
-            print(feature_ls.shape)
             # normalization
             feature_ls = feature_ls / np.expand_dims(np.sqrt(np.sum(np.power(feature_ls, 2), 1)), 1)
             feature_rs = feature_rs / np.expand_dims(np.sqrt(np.sum(np.power(feature_rs, 2), 1)), 1)
-            print(feature_ls.shape)
             
             if method == 'l2_distance':
                 scores = np.sum(np.power((feature_ls - feature_rs), 2), 1)
