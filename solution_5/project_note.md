@@ -17,7 +17,8 @@
 - [ ] Loss functions
 	- [x] Softmax
 	- [x] NormFace
-	- [ ] SphereFace
+	- [x] SphereFace: https://github.com/wujiyang/Face_Pytorch/blob/master/margin/SphereMarginProduct.py
+	- [x] ArcFace
 - [ ] Flip while evaluating
 - [ ] L2 Distance bug
 - [x] MobileFaceNet
@@ -34,4 +35,3 @@
 2. Plot metric space: https://github.com/cvqluu/Angular-Penalty-Softmax-Losses-Pytorch
 3. NormFace: https://zhuanlan.zhihu.com/p/64427565
 4. PyTorch Margins: https://github.com/wujiyang/Face_Pytorch
-	+ 
