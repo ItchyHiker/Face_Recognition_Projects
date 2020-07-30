@@ -24,3 +24,20 @@ class OHEMCrossEntropyLoss(nn.Module):
         keep_losses = losses[keep_idx]
         return keep_losses.sum() / keep_num
 
+class FocalCrossEntropyLoss(nn.Module):
+    """FocalLoss + CrossEntropyLoss"""
+    def __init__(self, gamma, alpha):
+        super(FocalCrossEntropyLoss, self).__init__()
+        self.gamma = gamma
+        self.alpha = alpha
+    
+    def forward(self, pred, target):
+        batch_size = pred.size(0)
+        # F.coss_entropy returns -logpt
+        logpt = -F.cross_entropy(pred, target, reduction='none')
+        pt = torch.exp(logpt)
+        if self.alpha is not None:
+            logpt *= self.alpha
+        losses = -((1-pt)**self.gamma) * logpt
+
+        return losses.sum() / batch_size
