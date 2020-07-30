@@ -14,3 +14,7 @@
 |       ArcFace      | 98.72% |
 |   OHEM + NormFace  |
 |FocalLoss + NormFace|
+|     Contrastive    |
+|        Triplet     |
+| Contrastive + Finetune|
+| Triplet + Finetune |
