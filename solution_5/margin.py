@@ -8,7 +8,7 @@ class NormFace(nn.Module):
     def __init__(self, feature_dim, num_class, scale=16):
         super(NormFace, self).__init__()
         self.weight = nn.Parameter(torch.Tensor(feature_dim, num_class))
-        nn.init.xavier_uniform(self.weight)
+        nn.init.xavier_uniform_(self.weight)
         self.weight.data.uniform_(-1, 1).renorm(2, 1, 1e-5).mul_(1e5)
         self.scale = scale
     def forward(self, x):
