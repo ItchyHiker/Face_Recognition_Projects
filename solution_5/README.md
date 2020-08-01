@@ -12,5 +12,9 @@
 |      SpereFace     | 98.50% |
 |       CosFace      | 98.88% |
 |       ArcFace      | 98.72% |
-|   OHEM + NormFace  |
-|FocalLoss + NormFace|
+|   OHEM + NormFace  | 98.00% |
+|FocalLoss + NormFace| 98.13% |
+|     Contrastive    |
+|        Triplet     |
+| Contrastive + Finetune|
+| Triplet + Finetune |
