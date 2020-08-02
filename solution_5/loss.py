@@ -41,3 +41,18 @@ class FocalCrossEntropyLoss(nn.Module):
         losses = -((1-pt)**self.gamma) * logpt
 
         return losses.sum() / batch_size
+
+class ContrastiveLoss(nn.Module):
+    """ContrastiveLoss using pair samples"""
+    def __init__(self, margin):
+        super(ContrastiveLoss, self).__init__()
+        self.margin = margin
+    
+    def forward(self, outputs, target):
+        distance = F.pairwise_distance(outputs[0], outputs[1])
+        loss = 0.5*target.float() * torch.pow(distance, 2) + \
+                0.5*(1-target.float())*torch.pow(torch.clamp(self.margin-distance, min=0.0), 2)
+        
+        return loss.mean()
+
+

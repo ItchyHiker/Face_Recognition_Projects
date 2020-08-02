@@ -48,6 +48,66 @@ class CASIAWebFace(Dataset):
     def __len__(self):
         return len(self.image_list)
 
+class SiameseCASIAWebFace(Dataset):
+    def __init__(self, root_path, file_list, transform=None):
+        self.root_path = root_path
+        self.transform = transform
+        
+        image_list = []
+        label_list = []
+        with open(file_list) as f:
+            lines = f.readlines()
+            for line in lines:
+                line = line.strip()
+                image_path, label_name = line.split(' ')
+                image_list.append(image_path)
+                label_list.append(int(label_name))
+
+        self.image_list = image_list
+        self.label_list = label_list
+        self.label_set = set(self.label_list)
+        self.num_class = len(self.label_set)
+        self.label_array = np.array(label_list)
+        self.label_to_idxs = {label:np.where(self.label_array==label)[0]
+                                for label in self.label_set}
+        print("CASIA dataset size:", len(self.image_list), '/', self.num_class)
+        
+
+    def __len__(self):
+        return len(self.image_list)
+
+    def __getitem__(self, index):
+        target = np.random.randint(0, 2)
+        imageL_path, labelL = self.image_list[index], self.label_list[index]
+        if target == 1: # 
+            siamese_index = index
+            while siamese_index == index:
+                siamese_index = np.random.choice(self.label_to_idxs[labelL])
+                
+        else:
+            siamese_label = np.random.choice(list(self.label_set - set([labelL])))
+            siamese_index = np.random.choice(self.label_to_idxs[siamese_label])
+        imageR_path = self.image_list[siamese_index]
+        labelR = self.label_list[siamese_index]
+        
+        imageL = cv2.imread(os.path.join(self.root_path, imageL_path), 1)
+        imageL = cv2.cvtColor(imageL, cv2.COLOR_BGR2RGB)
+        imageR = cv2.imread(os.path.join(self.root_path, imageR_path), 1)
+        imageR = cv2.cvtColor(imageR, cv2.COLOR_BGR2RGB)
+        
+        flip = np.random.choice(2) * 2 - 1
+        if flip == 1:
+            imageL = cv2.flip(imageL, 1)
+            imageR = cv2.flip(imageR, 1)
+        if self.transform is not None:
+            imageL = self.transform(imageL)
+            imageR = self.transform(imageR)
+        else:
+            imageL = torch.from_numpy(imageL)
+            imageR = torch.from_numpy(imageR)
+        
+        return imageL, imageR, target
+            
 
 class LFW(Dataset):
     def __init__(self, root_path, file_list, transform=None):
@@ -96,3 +156,5 @@ class LFW(Dataset):
     def __len__(self):
         return len(self.flags)
 
+if __name__ == "__main__":
+    train_data = SiameseCASIAWebFace('./training_data/CASIA', 'annotations/CASIA_anno.txt')
