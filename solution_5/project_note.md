@@ -19,6 +19,7 @@
 	- [x] NormFace
 	- [x] SphereFace: https://github.com/wujiyang/Face_Pytorch/blob/master/margin/SphereMarginProduct.py
 	- [x] ArcFace
+	- [x] ContrastiveLoss
 - [ ] Flip while evaluating
 - [ ] L2 Distance bug
 - [x] MobileFaceNet
@@ -35,3 +36,5 @@
 2. Plot metric space: https://github.com/cvqluu/Angular-Penalty-Softmax-Losses-Pytorch
 3. NormFace: https://zhuanlan.zhihu.com/p/64427565
 4. PyTorch Margins: https://github.com/wujiyang/Face_Pytorch
+5. Contrastive loss and hard mining: https://github.com/MLenthusiastic/ContrastiveLoss	
+	https://github.com/MLenthusiastic/ContrastiveLoss/blob/master/Contrastive_Accuracy.ipynb
