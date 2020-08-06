@@ -18,3 +18,17 @@
 |        Triplet     |
 | Contrastive + Finetune|
 | Triplet + Finetune |
+
+|      SEResNet34    |   LFW  |
+|:------------------:|:------:|
+|       Softmax      | 97.00% |
+|       NormFace     |        |
+|      SpereFace     | 		  |
+|       CosFace      | 		  |
+|       ArcFace      |        |
+|   OHEM + NormFace  |        |
+|FocalLoss + NormFace|        |
+|     Contrastive    |
+|        Triplet     |
+| Contrastive + Finetune|
+| Triplet + Finetune |
