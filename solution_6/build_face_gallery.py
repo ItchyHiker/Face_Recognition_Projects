@@ -17,7 +17,7 @@ transforms = tfs.Compose([
 def register_face(detect_model, embedding_model, image_path):
     embedding_model.eval()
 
-    embeddings = []
+    embeddings = None
     names = []
     
     images = [f for f in os.listdir(image_path) if f.endswith('.jpg')]
@@ -38,20 +38,27 @@ def register_face(detect_model, embedding_model, image_path):
         aligned_image = warp_and_crop_face(image, facial_5points, reference_pts=reference_5pts, crop_size=(112, 112))
         cv2.imshow("aligned_image", aligned_image)
         cv2.waitKey(0)
+        
         # 3. face embedding using face recognition model
         aligned_image = cv2.cvtColor(aligned_image, cv2.COLOR_BGR2RGB)
         input_tensor = transforms(aligned_image).unsqueeze(0)
         with torch.no_grad():
             embedding_feature = embedding_model(input_tensor)
-            embeddings.append(embedding_feature)
+            if embeddings is None:
+                embeddings = embedding_feature
+            else:
+                embeddings = torch.cat((embeddings, embedding_feature), 0)
 
         # 4. register face into face gallery
         print("Register face:", person_name)
         names.append(person_name)
+    print(embeddings)
+    torch.save(embeddings, 'gallery/face_embeddings.pth')
+    np.save('gallery/face_names.npy', names)
 
 if __name__ == "__main__":
     detect_model = MtcnnDetector()
     embedding_model = ResNet18()
-    image_path = './images'
+    image_path = './resources/images_to_register'
 
     register_face(detect_model, embedding_model, image_path)

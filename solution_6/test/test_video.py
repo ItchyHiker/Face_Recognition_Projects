@@ -21,12 +21,20 @@ def load_face_gallery():
     names = np.load('./gallery/face_names.npy')
     return embeddings, names
 
+def normalize_feature(face_embeddings):
+    norm_face_embeddings = face_embeddings 
+    norm = torch.sqrt(torch.sum(torch.pow(norm_face_embeddings, 2), 1, keepdim=True))
+    norm_face_embeddings = norm_face_embeddings / norm
+    return norm_face_embeddings
+
 if __name__ == '__main__':
-    resize_scale = 4
+    resize_scale = 1
     cap = cv2.VideoCapture('resources/TheBigBangTheory.mp4')
     face_detector = MtcnnDetector()
     face_embedder = ResNet18()
-    embeddings, names = load_face_gallery()
+    target_embeddings, names = load_face_gallery()
+    norm_target_embeddings = normalize_feature(target_embeddings)
+    
     reference_5pts = get_reference_facial_points(
             (112, 112), (0.25, 0.25), (0, 0), True)
     while True:
@@ -53,13 +61,23 @@ if __name__ == '__main__':
                 input_tensors = input_tensor
             else:
                 input_tensors = torch.cat((input_tensors, input_tensor), 0)
-        print(input_tensors.shape)
-
 
         with torch.no_grad():
-            embeddings = face_embedder(input_tensors)
-        print(embeddings.shape)
-
-
+            source_embeddings = face_embedder(input_tensors)
+        
+        norm_source_embeddings = normalize_feature(source_embeddings)
+        # calculate distance between detected face embedding feature and feature in gallery
+        # cosine score
+        scores = torch.sum(norm_target_embeddings*norm_source_embeddings, 1)
+        max_score, max_idx = torch.max(scores, dim=0)
+        max_score = max_score.cpu().numpy()
+        max_idx = max_idx.cpu().numpy()
+        if max_score > 0.2568:
+            print("Howard in this image")
+            bbox = bboxes[max_idx]
+            bbox = [int(_) for _ in bbox] 
+            cv2.rectangle(frame, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (255, 255, 0), 2, 16)
+        else:
+            print("Howard not in this image")
         cv2.imshow("frame", frame)
         cv2.waitKey(1)
