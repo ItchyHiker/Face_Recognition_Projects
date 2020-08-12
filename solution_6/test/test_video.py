@@ -37,6 +37,12 @@ if __name__ == '__main__':
     
     reference_5pts = get_reference_facial_points(
             (112, 112), (0.25, 0.25), (0, 0), True)
+    
+    _, frame = cap.read()
+
+    video_out = cv2.VideoWriter('output.avi', cv2.VideoWriter_fourcc(*'MJPG'), 
+            20.0, (frame.shape[1], frame.shape[0]), isColor=True)
+    
     while True:
         _, frame = cap.read()
         h, w, c = frame.shape
@@ -77,7 +83,14 @@ if __name__ == '__main__':
             bbox = bboxes[max_idx]
             bbox = [int(_) for _ in bbox] 
             cv2.rectangle(frame, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (255, 255, 0), 2, 16)
+            cv2.putText(frame, "Howard", (bbox[0]-20, bbox[1]-20), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
         else:
             print("Howard not in this image")
         cv2.imshow("frame", frame)
         cv2.waitKey(1)
+        video_out.write(frame)
+
+    cap.release()
+    video_out.release()
+    cv2.destroyAllWindows()
