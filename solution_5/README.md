@@ -32,3 +32,17 @@
 |        Triplet     |
 | Contrastive + Finetune|
 | Triplet + Finetune |
+
+|    MobileFaceNet   |   LFW  |
+|:------------------:|:------:|
+|       Softmax      | 83.60% |
+|       NormFace     |        |
+|      SpereFace     | 		  |
+|       CosFace      | 		  |
+|       ArcFace      |        |
+|   OHEM + NormFace  |        |
+|FocalLoss + NormFace|        |
+|     Contrastive    |
+|        Triplet     |
+| Contrastive + Finetune|
+| Triplet + Finetune |

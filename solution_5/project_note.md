@@ -20,6 +20,7 @@
 	- [x] SphereFace: https://github.com/wujiyang/Face_Pytorch/blob/master/margin/SphereMarginProduct.py
 	- [x] ArcFace
 	- [x] ContrastiveLoss
+	- [ ] TripletLoss
 - [ ] Flip while evaluating
 - [ ] L2 Distance bug
 - [x] MobileFaceNet
@@ -27,7 +28,10 @@
 - [ ] Plot metric space
 - [x] Compare LFW cropped result with other method
 - [ ] Debug LFW dataset crop and align using MTCNN
-
+- [ ] Train MobileFaceNet
+- [ ] Train 1/2 MobileFaceNet
+- [ ] Distill MobileFaceNet
+- [ ] Train MobileFaceNet with ArcFace
 
 
 
