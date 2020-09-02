@@ -5,7 +5,7 @@
 	+ 查看 eval 是否有问题
 	+ 貌似是LFW图没有切好或者是数据读取不对
 	问题就是图没有切好, 使用这个里面的LFW没问题：https://github.com/wujiyang/Face_Pytorch
-
+4. MobileFaceNet 训练结果不好同样还是没有使用正确图片的原因，耽误了好久。
 
 
 ## Todo
