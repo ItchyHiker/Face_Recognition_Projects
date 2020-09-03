@@ -35,11 +35,11 @@
 
 |    MobileFaceNet   |   LFW  |
 |:------------------:|:------:|
-|       Softmax      | 83.60% |
+|       Softmax      |        |
 |       NormFace     |        |
 |      SpereFace     | 		  |
 |       CosFace      | 		  |
-|       ArcFace      |        |
+|       ArcFace      | 91.37% |
 |   OHEM + NormFace  |        |
 |FocalLoss + NormFace|        |
 |     Contrastive    |
@@ -49,11 +49,11 @@
 
 |    MobileFaceNetHalf   |   LFW  |
 |:------------------:|:------:|
-|       Softmax      | 83.17% |
+|       Softmax      |        |
 |       NormFace     |        |
 |      SpereFace     | 		  |
 |       CosFace      | 		  |
-|       ArcFace      |        |
+|       ArcFace      | 89.40% |
 |   OHEM + NormFace  |        |
 |FocalLoss + NormFace|        |
 |     Contrastive    |
