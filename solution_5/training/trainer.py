@@ -5,8 +5,8 @@ import torch
 import torch.nn as nn
 import numpy as np
 
-from loss import *
-from layer import NormFace, SphereFace, CosFace, ArcFace
+from loss import OHEMCrossEntropyLoss, FocalCrossEntropyLoss
+from margin import NormFace, SphereFace, CosFace, ArcFace
 from tools.average_meter import AverageMeter
 
 
@@ -27,8 +27,10 @@ class Trainer(object):
         # save best model
         self.best_val_acc = -100
         
+        # self.criterion = FocalCrossEntropyLoss(3, 0.5)
+        # self.criterion = OHEMCrossEntropyLoss(0.75)
         self.criterion = torch.nn.CrossEntropyLoss().to(device)
-    
+        # self.criterion = torch.nn.NLLLoss().to(device)
     def train(self):
         for epoch in range(self.epochs):
             self.train_epoch(epoch, 'train')
@@ -53,12 +55,13 @@ class Trainer(object):
                     output = self.margin(logits)
                 elif isinstance(self.margin, SphereFace) or \
                      isinstance(self.margin, CosFace) or \
-                     isinstance(self.margin, ArcFace):
+                     isinstance(self.margin, ArcFace) or \
+                     isinstance(self.margin, ArcFace2):
                     output = self.margin(logits, label)
                 else:
                     raise NameError("Margin Type Not Supported!")
                 
-                _, preds = torch.max(output, dim=1)
+                _, preds = torch.max(output.data, dim=1)
                 acc = (preds.cpu().numpy() == label.data.cpu().numpy()).sum()/label.size(0)
                 loss = self.criterion(output, label)
                 loss.backward()

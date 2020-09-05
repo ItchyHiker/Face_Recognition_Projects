@@ -37,7 +37,7 @@ dataloaders = {'train': DataLoader(train_data, batch_size=config.BATCH_SIZE,
                                     shuffle=False, **kwargs),}
 
 # Set model
-ckpt_tag = 'mobilefacenet_kd'                
+ckpt_tag = 'mobilefacenet_kd_logits'                
 teacher = MobileFaceNet(config.feature_dim)
 student = MobileFaceNetHalf(config.feature_dim)
 teacher = teacher.to(device)

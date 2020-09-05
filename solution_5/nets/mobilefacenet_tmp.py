@@ -43,7 +43,7 @@ class DepthWiseBlock(nn.Module):
         super(DepthWiseBlock, self).__init__()
         self.p_conv = ConvBNPReLU(in_c, groups, 1, 1, 0)
         self.d_conv = ConvBNPReLU(groups, groups, kernel_size, stride=stride,
-                                    padding=padding, groups=groups)
+                                    padding=padding)
         self.project = LinearBlock(groups, out_c, 1, 1, 0)
         if in_c == out_c  and stride == 1:
             self.residual = True
@@ -118,55 +118,11 @@ class MobileFaceNet(nn.Module):
         x = self.conv_6_flatten(x)
         x = self.linear(x)
         x = self.bn(x)
-        return l2_norm(x)
-        # return l2_norm(x)*20
+        return l2_norm(x)*20
         # return x
 
-class MobileFaceNetHalf(nn.Module):
-    def __init__(self, feature_dim=512):
-        super(MobileFaceNetHalf, self).__init__()
-        self.conv_1 = ConvBNPReLU(3, 32, 3, 2, 1)
-        self.conv_2_dw = ConvBNPReLU(32, 32, 3, 1, 1, groups=32)
-        self.conv_23 = DepthWiseBlock(32, 32, 3, 2, 1, groups=64)
-        self.conv_3 = ResidualBlock(32, 4, 64, 3, 1, 1)
-        self.conv_34 = DepthWiseBlock(32, 64, 3, 2, 1, groups=128)
-        self.conv_4 = ResidualBlock(64, 6, 128, 3, 1, 1)
-        self.conv_45 = DepthWiseBlock(64, 64, 3, 2, 1, groups=256)
-        self.conv_5 = ResidualBlock(64, 2, 128, 3, 1, 1)
-        self.conv_6_sep = ConvBNPReLU(64, 256, 1, 1, 0)
-        self.conv_6_dw = LinearBlock(256, 256, 7, 1, 0, groups=256)
-        self.conv_6_flatten = Flatten()
-        self.linear = nn.Linear(256, feature_dim, bias=False)
-        self.bn = nn.BatchNorm1d(feature_dim)
-    
-        # weight initialization
-        for m in self.modules():
-            if isinstance(m, nn.Conv2d):
-                n = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
-                m.weight.data.normal_(0, math.sqrt(2./n))
-            elif isinstance(m, nn.BatchNorm2d):
-                m.weight.data.fill_(1)
-                m.bias.data.zero_()
-
-    def forward(self, x):
-        x = self.conv_1(x)
-        x = self.conv_2_dw(x)
-        x = self.conv_23(x)
-        x = self.conv_3(x)
-        x = self.conv_34(x)
-        x = self.conv_4(x)
-        x = self.conv_45(x)
-        x = self.conv_5(x)
-        x = self.conv_6_sep(x)
-        x = self.conv_6_dw(x)
-        x = self.conv_6_flatten(x)
-        x = self.linear(x)
-        x = self.bn(x)
-        return x
-
-
 if __name__ == "__main__":
-    net = MobileFaceNetHalf()
+    net = MobileFaceNet()
     torch.save(net.state_dict(), 'tmp.pth')
     summary(net.cuda(), (3, 112, 112))
 

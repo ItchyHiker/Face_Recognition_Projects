@@ -55,4 +55,3 @@ class ContrastiveLoss(nn.Module):
         
         return loss.mean()
 
-

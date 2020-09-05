@@ -5,6 +5,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+
 class SoftTarget(nn.Module):
     """
     Distilling the knowledge in a Neural Network
